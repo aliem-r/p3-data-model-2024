@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id          String   @id @unique @default(uuid())
+  nickname    String   @unique
+  firstName   String?
+  lastName    String?
+  bulletElo   Int      @default(0)
+  blitzElo    Int      @default(0)
+  rapidElo    Int      @default(0)
+  winnedGames Game[]   @relation("winnerPlayer")
+  lostGames   Game[]   @relation("loserPlayer")
+  timestamp   DateTime @default(now())
+}
+
+model Game {
+  id           String     @id @unique @default(uuid())
+  matchDate    DateTime
+  tournament   Tournament @relation(fields: [tournamentId], references: [id])
+  tournamentId String
+  winner       Player     @relation("winnerPlayer", fields: [winnerId], references: [id])
+  winnerId     String
+  loser        Player     @relation("loserPlayer", fields: [loserId], references: [id])
+  loserId      String
+  timestamp    DateTime   @default(now())
+}
+
+model Tournament {
+  id             String    @id @unique @default(uuid())
+  tournamentName String?
+  type           String
+  dificulty      String //begginner (<1399), intermediate (1400 - 1799), advanced (1800 -1999), master (>2000)
+  prizePool      PrizePool @relation(fields: [prizePoolId], references: [id])
+  prizePoolId    String
+  games          Game[]
+  timestamp      DateTime  @default(now())
+}
+
+model PrizePool {
+  id         String       @id @unique @default(uuid())
+  first      Int
+  second     Int
+  third      Int
+  Tournament Tournament[]
+}
