@@ -23,30 +23,30 @@ model Player {
   rapidElo    Int      @default(0)
   winnedGames Game[]   @relation("winnerPlayer")
   lostGames   Game[]   @relation("loserPlayer")
-  timestamp   DateTime @default(now())
+  timestamp   DateTime @default(now()) @updatedAt
 }
 
 model Game {
   id           String     @id @unique @default(uuid())
-  matchDate    DateTime
+  matchDate    DateTime   @default(now())
   tournament   Tournament @relation(fields: [tournamentId], references: [id])
   tournamentId String
   winner       Player     @relation("winnerPlayer", fields: [winnerId], references: [id])
   winnerId     String
   loser        Player     @relation("loserPlayer", fields: [loserId], references: [id])
   loserId      String
-  timestamp    DateTime   @default(now())
+  timestamp    DateTime   @default(now()) @updatedAt
 }
 
 model Tournament {
   id             String    @id @unique @default(uuid())
   tournamentName String?
-  type           String
-  dificulty      String //begginner (<1399), intermediate (1400 - 1799), advanced (1800 -1999), master (>2000)
+  type           String //bullet, blitz, rapid, classical
+  dificulty      String //begginner (< 1399), intermediate (1400 - 1799), advanced (1800 - 1999), master (> 2000)
   prizePool      PrizePool @relation(fields: [prizePoolId], references: [id])
   prizePoolId    String
   games          Game[]
-  timestamp      DateTime  @default(now())
+  timestamp      DateTime  @default(now()) @updatedAt
 }
 
 model PrizePool {
@@ -55,4 +55,5 @@ model PrizePool {
   second     Int
   third      Int
   Tournament Tournament[]
+  timestamp  DateTime     @default(now()) @updatedAt
 }
