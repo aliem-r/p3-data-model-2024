@@ -3,8 +3,8 @@
     "module": "index.ts",
     "scripts": {
         "seed": "bunx prisma db push --force-reset && bun run prisma/seed.ts",
-        "player": "bun ./scripts/player-scripts.ts ${args}",
-        "game": "bun ./scripts/game-scripts.ts ${args}"
+        "player": "bun ./scripts/player-scripts.ts $args",
+        "game": "bun ./scripts/game-scripts.ts $args"
     },
     "devDependencies": {
         "@types/bun": "latest",
