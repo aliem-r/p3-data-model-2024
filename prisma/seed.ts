@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const db = new PrismaClient();
+import { db } from "../src/db";
 
 //Seed prize pools
 const prizePools = await db.prizePool.createMany({
@@ -57,7 +55,7 @@ const tournaments = await db.tournament.createMany({
         },
         {
             tournamentName: "FIDE World Chess Championship",
-            type: "classical",
+            type: "rapid",
             dificulty: "master",
             prizePoolId: prizePool1M!.id,
         },
