@@ -1,15 +1,70 @@
-# Modelo de Datos
+# Modelo de Datos con Prisma y PostgreSQL
+
+Esta aplicación es un sistema de gestión de torneos de ajedrez que permite almacenar y administrar información sobre torneos, partidas y jugadores. Utiliza Prisma como ORM y PostgreSQL como base de datos.
+
+El modelo de datos incluye las siguientes entidades: `Tournament`, `Game`, `Player` y `PrizePool` relacionadas de la siguiente manera:
+
+<img src="https://raw.githubusercontent.com/aliem-r/p3-data-model-2024/871873cfa1f4a3541bdd0592196d6464cd3ec241/prisma-erd.svg"  width="500">
+
+El proyecto incluye un script (`seed.ts`) para inicializar la base de datos con datos de prueba, como torneos de ejemplo, jugadores generados aleatoriamente y partidas simuladas.
+
+## Requisitos previos
+
+-   Node.js (versión 14 o superior)
+-   Bun (gestor de paquetes y entorno de ejecución)
+-   Docker y Docker Compose (para ejecutar PostgreSQL en un contenedor)
+
+## Instalación y seeding
+
+**1. Instala las dependencias con Bun.**
+
+```
+bun install
+```
+
+**2. Crea un archivo `.env` en la raíz del proyecto con las siguientes variables de entorno.**
+
+```
+DB_HOST=localhost
+DB_USER=user
+DB_PASSWORD=password
+DB_NAME=dbName
+DB_PORT=5432
+DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+# postgresql://user:password@localhost:5432/dbName
+```
+
+Estas variables de entorno se utilizarán en los archivos `docker-compose.yml` y `schema.prisma`.
+
+**3. Inicia el contenedor de PostgreSQL con Docker Compose:**
+
+```
+docker compose up -d
+```
+
+Este comando iniciará un contenedor de PostgreSQL en segundo plano.
+
+**4. Genera el cliente de Prisma, aplica el esquema de Prisma y siembra la base de datos con datos iniciales ejecutando el siguiente comando:**
+
+```
+bun seed
+```
+
+<br><br><br><br>
+
+# Enunciado de la práctica
 
 En esta práctica hay que desarrollar el modelo de datos para una aplicación que resulte de tu interés. (No es necesario pensar en la autenticación aún, estudiaremos eso por separado.)
 
 Se trata, como otras veces, de hacer un _fork_ de este repositorio y trabajar en él.
 
 La solución del ejercicio debe ser un proyecto Javascript con:
-- El esquema de Prisma (`schema.prisma`).
-- La configuración para una base de datos (con `docker-compose.yml`).
-- Rellenado con unos pocos datos de prueba.
-- Scripts en Typescript de demostración que hacen algunas cosas con los datos.
-- Documentación sobre cómo lanzar la base de datos y usar los scripts de demostración (sustituyendo este mismo README).
+
+-   El esquema de Prisma (`schema.prisma`).
+-   La configuración para una base de datos (con `docker-compose.yml`).
+-   Rellenado con unos pocos datos de prueba.
+-   Scripts en Typescript de demostración que hacen algunas cosas con los datos.
+-   Documentación sobre cómo lanzar la base de datos y usar los scripts de demostración (sustituyendo este mismo README).
 
 ## Esquema
 
