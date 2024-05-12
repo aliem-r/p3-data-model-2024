@@ -52,6 +52,88 @@ bun seed
 
 <br><br><br><br>
 
+# Scripts para manipulación de datos
+
+El proyecto cuenta con varios scripts para manipular los datos de los jugadores y partidas en la base de datos. A continuación, se detallan los comandos disponibles:
+
+## Comandos para Player
+
+**Crear un nuevo jugador en la base de datos:**
+
+```
+bun player new-player <nickname> <firstName> <lastName> <bulletElo> <blitzElo> <rapidElo>
+```
+
+**Obtener todos los jugadores registrados:**
+
+```
+bun player get-all-players
+```
+
+**Obtener un jugador específico:**
+
+```
+bun player get-player <nickname>
+```
+
+**Obtener el rating ELO de un jugador específico:**
+
+```
+bun player get-player-elo <nickname>
+```
+
+**Actualizar el nombre de un jugador:**
+
+```
+bun player set-player-firstname <nickname> <firstName>
+```
+
+**Actualizar el apellido de un jugador:**
+
+```
+bun player set-player-firstname <nickname> <lastName>
+```
+
+**Eliminar un jugador de la base de datos:**
+
+```
+bun player delete-player <nickname>
+```
+
+## Comandos para Game
+
+**Crear una nueva partida en la base de datos:**
+
+```
+bun game new-game <matchDateString> <tournamentId> <winnerNickname> <loserNickname>
+```
+
+**Obtener todas las partidas registradas:**
+
+```
+bun game get-all-games
+```
+
+**Obtener una partida específica:**
+
+```
+bun game get-game <id>
+```
+
+**Actualizar la fecha de una partida:**
+
+```
+bun game set-match-date <id> <matchDateString>
+```
+
+**Eliminar una partida de la base de datos:**
+
+```
+bun game delete-game <id>
+```
+
+<br><br><br><br>
+
 # Enunciado de la práctica
 
 En esta práctica hay que desarrollar el modelo de datos para una aplicación que resulte de tu interés. (No es necesario pensar en la autenticación aún, estudiaremos eso por separado.)
