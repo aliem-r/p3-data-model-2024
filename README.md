@@ -44,7 +44,12 @@ docker compose up -d
 
 Este comando iniciará un contenedor de PostgreSQL en segundo plano.
 
-**4. Genera el cliente de Prisma, aplica el esquema de Prisma y siembra la base de datos con datos iniciales ejecutando el siguiente comando:**
+**4. Genera el cliente de Prisma**
+```
+bunx prisma generate
+```
+
+**5. Aplica el esquema de Prisma y siembra la base de datos con datos iniciales ejecutando el siguiente comando:**
 
 ```
 bun seed
