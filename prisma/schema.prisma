@@ -41,7 +41,7 @@ model Game {
 model Tournament {
   id             String    @id @unique @default(uuid())
   tournamentName String?
-  type           String //bullet, blitz, rapid, classical
+  type           String //bullet, blitz, rapid
   dificulty      String //begginner (< 1399), intermediate (1400 - 1799), advanced (1800 - 1999), master (> 2000)
   prizePool      PrizePool @relation(fields: [prizePoolId], references: [id])
   prizePoolId    String
